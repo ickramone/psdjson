@@ -16,15 +16,18 @@ https://forums.adobe.com/thread/2414420
 http://d.hatena.ne.jp/chalcedony_htn/20150220/1424439182
 
 JSON.stringify(value[, replacer[, space]])
-引数
-value
+
+■ value
 JSON 文字列に変換する値。オブジェクトや配列
-replacer 任意
+
+■ replacer 任意
 もし関数である場合、文字列化の間に出会った値とプロパティを変換します。
 もし配列である場合は、配列で指定したkeyだけフィルターされます。
-space 任意
+
+■ space 任意
 結果の文字列を整形して出力します。数字だとスペースの量、文字"\t"とかだとタブでインデントしてくれる
 
+----------
 var jsonText = JSON.stringify(arr, undefined , "\t");
 filename = File.saveDialog("保存ファイル名を入れて下さい");
 if (filename) {
@@ -38,3 +41,4 @@ if (filename) {
 　　　　alert("ファイルが開けませんでした");
 　　}
 }
+----------
