@@ -1,5 +1,5 @@
 # psdjson
-# Adobe ExtendScript でJSONを扱う
+### Adobe ExtendScript でJSONを扱う
 
 Photoshopのスクリプトで座標などの情報をJSONへ書き出したい
 通常Javascriptでは　JSON.stringify()　を使うと書き出せるみたいなんですが、
@@ -27,16 +27,16 @@ JSON 文字列に変換する値。オブジェクトや配列
 * space 任意
 結果の文字列を整形して出力します。数字だとスペースの量、文字"\t"とかだとタブでインデントしてくれる
 
-`　　　　var jsonText = JSON.stringify(arr, undefined , "\t");`
-`　　　　filename = File.saveDialog("保存ファイル名を入れて下さい");`
-`　　　　if (filename) {`
-`　　　　　　fileObj = new File(filename);`
-`　　　　　　flag = fileObj.open("w");`
-`　　　　　　　　if (flag == true) {`
-`　　　　　　　　// text = "こんな具合にファイルに書き出せます。";`
-`　　　　　　　　fileObj.write(jsonText);`
-`　　　　　　　　fileObj.close();`
-`　　　　　　　　} else {`
-`　　　　　　　　alert("ファイルが開けませんでした");`
-`　　　　　　}`
-`　　　　}`
+`　　　　var jsonText = JSON.stringify(arr, undefined , "\t");`  
+`　　　　filename = File.saveDialog("保存ファイル名を入れて下さい");`  
+`　　　　if (filename) {`  
+`　　　　　　fileObj = new File(filename);`  
+`　　　　　　flag = fileObj.open("w");`  
+`　　　　　　　　if (flag == true) {`  
+`　　　　　　　　// text = "こんな具合にファイルに書き出せます。";`  
+`　　　　　　　　fileObj.write(jsonText);`  
+`　　　　　　　　fileObj.close();`  
+`　　　　　　　　} else {`  
+`　　　　　　　　alert("ファイルが開けませんでした");`  
+`　　　　　　}`  
+`　　　　}`  
