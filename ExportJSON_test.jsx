@@ -2,37 +2,16 @@
 #include "lib/json2.js"
 
 $.appEncoding = "UTF-8";
-
 app.preferences.rulerUnits = Units.PIXELS;
 app.preferences.typeUnits = TypeUnits.POINTS;
-/*
-■レイヤーを取得、座標を取得、配列に格納
-・開いているドキュメントのレイヤーの個数を取得
-・Forで順番に各レイヤーを取得
-・レイヤーセットがあったら再帰的にレイヤーを取得
-・取得したレイヤーの座標を取得
-・座標を配列に入れる　Arr = [pos];
-[Layer名：[x]:X\,[y]:y, Layer名：[x]:X\,[y]:y]
-
-■配列の個数分テキストレイヤーを作成、
-・配列個数分新規レイヤーを作成する for ( i = 0; i < pos.length; i++)
-・レイヤーのタイプをテキストに変更
-・テキストレイヤーに座標を代入
-・ポジションを代入
-・Y座標を作成個数ごとずらす　var posY = 0; Array(100, 30 * [i] + 30);
-・スタイルを適用
-*/
-
 //メインスクリプトはここから
 CreateTextLayers();
 
 function CreateTextLayers() {
   var arr = []; //テキストレイヤーに渡す配列
   var findLayer = function(layers) {
-    //レイヤー分だけループ
     for (var i = 0; i < layers.length; i++) {
       var item = layers[i]; //レイヤーを取得
-      // var name = layers[i].name; //名前を取得
       var name = layers[i].name.replace(/\s/g, "");
       //$.writeln(name);
       var type = layers[i].kind; //レイヤータイプ
@@ -44,7 +23,6 @@ function CreateTextLayers() {
       var x2 = parseInt(posxy[0] - (docw / 2)); //x座標　ドキュメントのセンターから
       var y = parseInt(posxy[1]);
       pos = x + " " + y + " W:" + w + " H:" + h;
-      //レイヤーの種類がテキストレイヤーだった場合、
       if (type === LayerKind.TEXT) {
         var fntsize = parseInt(item.textItem.size) + "px "; //テキストサイズ
         var justifi = item.textItem.justification; //justification.CENTER RIGHT LEFT
@@ -70,24 +48,18 @@ function CreateTextLayers() {
         }
       }
     }
-    //return arr;
   }
 
-  var doc = app.activeDocument; //アクティブドキュメントを取得
-  var layers = findLayer(doc.layers); //レイヤー名を取得
-  var doclay = doc.artLayers; //レイヤー
+  var doc = app.activeDocument;
+  var layers = findLayer(doc.layers);
+  var doclay = doc.artLayers;
   var posY = 0; //初期テキストレイヤーのYポジション
-  // リターン（改行）コードを変数に指定
-  // var CR = String.fromCharCode(13);
-  //■配列の個数分テキストレイヤーを作成
   for (var i = 0; i < arr.length; i++) {
-    var newLay = doclay.add(); // 新規レイヤー
-    // テキストレーヤーに文字を入力する
-    newLay.kind = LayerKind.TEXT; // レイヤー種別をテキストレイヤーに設定
+    var newLay = doclay.add();
+    newLay.kind = LayerKind.TEXT;
     var result = arr[i].match(/\s[-\d]{1,4}/g);
-    //$.writeln(result + " " + result[0] + " " + result[1]);
     newLay.textItem.position = Array(result[0], result[1]); // レイヤー位置を指定 マッチした配列から取得する
-    newLay.textItem.size = 15; // フォントサイズ。
+    newLay.textItem.size = 15;
     var txt = arr[i].match(/[0-9]px/); //数字のあとにpxが続く文字にマッチ
     if (txt) {
       //色指定
@@ -105,27 +77,12 @@ function CreateTextLayers() {
       txtClrWh.rgb.hexValue = 'FAFAFA'; // Hexで指定
       newLay.textItem.color = txtClrWh; // フォント色適用
     }
-
-
-
-    /* 色指定
-      var textColor = new SolidColor;
-      // textColor.rgb.red = 200;
-      // textColor.rgb.green = 200;
-      // textColor.rgb.blue = 200;
-      textColor.rgb.hexValue = 'FAFAFA'; // Hexで指定
-      newLay.textItem.color = textColor; // フォント色
-      */
     newLay.textItem.font = "mplus-2c-regular"; // フォント名(postScriptNam名)
-    // newLay.name = writeText; //レイヤー名
-    // テキストレイヤーに文字列を格納
     newLay.textItem.contents = arr[i];
     //レイヤースタイルを適用
     txtStyle();
-    // layerObj[0].applyStyle("TerraPOStext");
-    // alert("CreateTextLayers\n"+layers.join("\n"));//一覧を表示
   }
-
+//JSONファイルを書き出す
   var jsonText = JSON.stringify(arr, undefined , "\t");
   filename = File.saveDialog("保存ファイル名を入れて下さい");
   if (filename) {
