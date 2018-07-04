@@ -8,4 +8,5 @@ PhotoshopなどのAdobeExtendScriptではそのまま使えない
 https://github.com/douglascrockford/JSON-js
 などからJSON用のライブラリを落としてきて、
 それを参照して使う
-このフォーラムを参照
+https://forums.adobe.com/thread/2414420
+フォーラムを参照
