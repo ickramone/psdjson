@@ -11,11 +11,11 @@ https://github.com/douglascrockford/JSON-js
 https://forums.adobe.com/thread/2414420
 フォーラムを参照
 
-外部JSXファイルのインクルード方法
-`#include "file1.jsxinc;folder/file2.jsxinc"`
+外部JSXファイルのインクルード方法  
+`#include "file1.jsxinc;folder/file2.jsxinc"`  
 http://d.hatena.ne.jp/chalcedony_htn/20150220/1424439182
 
-`JSON.stringify(value[, replacer[, space]])`
+`JSON.stringify(value[, replacer[, space]])`  
 
 * value
 JSON 文字列に変換する値。オブジェクトや配列
@@ -27,6 +27,7 @@ JSON 文字列に変換する値。オブジェクトや配列
 * space 任意
 結果の文字列を整形して出力します。数字だとスペースの量、文字"\t"とかだとタブでインデントしてくれる
 
+PhotoshopでJSONファイルを書き出す例  
 `　　　　var jsonText = JSON.stringify(arr, undefined , "\t");`  
 `　　　　filename = File.saveDialog("保存ファイル名を入れて下さい");`  
 `　　　　if (filename) {`  
